@@ -25,10 +25,10 @@ namespace BookStoreApplication.Repository
         {
             return new List<BookModel>()
             {
-                new BookModel(){Id =1, Title = "ASP.NET Core", Author="Muhammad"},
-                new BookModel(){Id =2, Title = "English", Author="Zahra"},
-                new BookModel(){Id =3, Title = "Web", Author="Nematullah"},
-                new BookModel(){Id =4, Title = "JavaScript", Author="Baqir"},
+                new BookModel(){Id =1, Title = "ASP.NET Core", Author="Muhammad", Description="Some description about Muhammad"},
+                new BookModel(){Id =2, Title = "English", Author="Zahra", Description="Some description about Zahra"},
+                new BookModel(){Id =3, Title = "Web", Author="Nematullah", Description="Some description about Nematullah"},
+                new BookModel(){Id =4, Title = "JavaScript", Author="Baqir", Description="Some description about Baqir"},
             };
         }
     }

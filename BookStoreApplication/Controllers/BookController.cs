@@ -21,7 +21,7 @@ namespace BookStoreApplication.Controllers
         {
             var data = _bookRepository.GetAllBooks();
 
-            return View();
+            return View(data);
         }
         public BookModel GetBook(int id)
         {
