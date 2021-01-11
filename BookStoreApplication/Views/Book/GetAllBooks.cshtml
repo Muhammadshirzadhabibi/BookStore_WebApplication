@@ -1,26 +1,28 @@
-﻿@using BookStoreApplication.Models;
-@model IEnumerable<BookModel>
+﻿@model IEnumerable<BookModel>
+@{
+    ViewData["Title"] = "AllBooks";
+}
 <div class="container">
-<h3 class="display-4">All Books</h3>
-<div class="row">
-    @foreach (var book in Model)
-    {
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="~/images/Wallpapers-For-Designers-47.jpg" class="card-img-top" width="100%" height="225" />
-                <div class="card-body">
-                    <h3 class="card-title">@book.Title</h3>
-                    <p class="card-text">@book.Description</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="/book/getbook/@book.Id" class="btn btn-sm btn-outline-secondary">View Details</a>
+    <h3 class="display-4">All Books</h3>
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="~/images/Wallpapers-For-Designers-47.jpg" class="card-img-top" width="100%" height="225" />
+                    <div class="card-body">
+                        <h3 class="card-title">@book.Title</h3>
+                        <p class="card-text">@book.Description</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="/book/getbook/@book.Id" class="btn btn-sm btn-outline-secondary">View Details</a>
+                            </div>
+                            <small class="text-muted">@book.Author</small>
                         </div>
-                        <small class="text-muted">@book.Author</small>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
 
-</div>
+    </div>
 </div>
