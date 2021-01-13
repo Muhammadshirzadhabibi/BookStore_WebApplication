@@ -1,6 +1,9 @@
+using BookStoreApplication.Data;
+using BookStoreApplication.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -21,6 +24,11 @@ namespace BookStoreApplication
 
 #endif
             services.AddControllersWithViews();
+
+            services.AddDbContext<BookStoreContext>(options =>
+            options.UseSqlServer("Server=.;Database=BookStoreApplication;Integrated Security=True;"));
+
+            services.AddScoped<BookRepository, BookRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
