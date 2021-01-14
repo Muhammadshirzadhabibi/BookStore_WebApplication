@@ -35,7 +35,15 @@ namespace BookStoreApplication.Controllers
         }
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-            ViewBag.Language = new SelectList(new List<string>() { "Dari", "English", "Pashto" });
+            ViewBag.Language = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text ="Dari", Value ="1"},
+                new SelectListItem(){Text ="English", Value ="2"},
+                new SelectListItem(){Text ="Pashto", Value ="3"},
+                new SelectListItem(){Text ="Hindi", Value ="4"},
+                new SelectListItem(){Text ="Russain", Value ="5"},
+                new SelectListItem(){Text ="British", Value ="6"}
+            };
             ViewBag.Success = isSuccess;
             ViewBag.BookId = bookId;
             return View();
@@ -53,11 +61,27 @@ namespace BookStoreApplication.Controllers
                 }
             }
 
-            ViewBag.Language = new SelectList(new List<string>() { "Dari", "English", "Pashto" });
-
+            ViewBag.Language = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text ="Dari", Value ="1"},
+                new SelectListItem(){Text ="English", Value ="2"},
+                new SelectListItem(){Text ="Pashto", Value ="3"},
+                new SelectListItem(){Text ="Hindi", Value ="4"},
+                new SelectListItem(){Text ="Russain", Value ="5"},
+                new SelectListItem(){Text ="British", Value ="6"}
+            };
 
             ModelState.AddModelError("", "Please fill each input according to thier error message");
             return View();
+        }
+
+        private List<LanguageModel> GetLanguage()
+        {
+            return new List<LanguageModel>()
+            {
+                new LanguageModel(){Id=1, Text="English"},
+                new LanguageModel(){Id=2, Text="Dari"}
+            };
         }
     }
 }
