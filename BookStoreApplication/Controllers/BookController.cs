@@ -1,6 +1,7 @@
 ﻿using BookStoreApplication.Models;
 using BookStoreApplication.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace BookStoreApplication.Controllers
         }
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
+            ViewBag.Language = new SelectList(new List<string>() { "Dari", "English", "Pashto" });
             ViewBag.Success = isSuccess;
             ViewBag.BookId = bookId;
             return View();
@@ -50,7 +52,11 @@ namespace BookStoreApplication.Controllers
                     return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = id });
                 }
             }
-           
+
+            ViewBag.Language = new SelectList(new List<string>() { "Dari", "English", "Pashto" });
+
+
+            ModelState.AddModelError("", "Please fill each input according to thier error message");
             return View();
         }
     }
