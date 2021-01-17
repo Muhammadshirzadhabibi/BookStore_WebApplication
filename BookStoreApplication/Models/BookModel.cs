@@ -19,11 +19,8 @@ namespace BookStoreApplication.Models
         public string Description { get; set; }
         public string Categoey { get; set; }
         [Required(ErrorMessage ="Please choose book language")]
+        public int LanguageId { get; set; }
         public string Language { get; set; }
-
-        [Required(ErrorMessage = "Please choose book languages")]
-        public List<string> MultiLanguage { get; set; }
-
         [Display(Name ="Total pages of book")]
         [Required(ErrorMessage = "Please enter totalPages")]
         public int? TotalPages { get; set; }

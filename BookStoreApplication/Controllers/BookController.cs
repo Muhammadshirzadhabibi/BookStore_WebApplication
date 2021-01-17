@@ -12,10 +12,12 @@ namespace BookStoreApplication.Controllers
     public class BookController : Controller
     {
         private readonly BookRepository _bookRepository = null;
+        private readonly LanguageRepository _languageRepository = null;
 
-        public BookController(BookRepository bookRepository)
+        public BookController(BookRepository bookRepository, LanguageRepository languageRepository)
         {
             _bookRepository = bookRepository;
+            _languageRepository = languageRepository;
         }
 
         public async Task<ViewResult> GetAllBooks()
@@ -33,17 +35,9 @@ namespace BookStoreApplication.Controllers
         {
             return _bookRepository.SearchBook(bookName, authorName);
         }
-        public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
+        public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-            ViewBag.Language = new List<SelectListItem>()
-            {
-                new SelectListItem(){Text ="Dari", Value ="1"},
-                new SelectListItem(){Text ="English", Value ="2"},
-                new SelectListItem(){Text ="Pashto", Value ="3"},
-                new SelectListItem(){Text ="Hindi", Value ="4"},
-                new SelectListItem(){Text ="Russain", Value ="5"},
-                new SelectListItem(){Text ="British", Value ="6"}
-            };
+            ViewBag.Language = new SelectList( await _languageRepository.GetLanguages(), "Id", "Text" );
             ViewBag.Success = isSuccess;
             ViewBag.BookId = bookId;
             return View();
@@ -61,15 +55,7 @@ namespace BookStoreApplication.Controllers
                 }
             }
 
-            ViewBag.Language = new List<SelectListItem>()
-            {
-                new SelectListItem(){Text ="Dari", Value ="1"},
-                new SelectListItem(){Text ="English", Value ="2"},
-                new SelectListItem(){Text ="Pashto", Value ="3"},
-                new SelectListItem(){Text ="Hindi", Value ="4"},
-                new SelectListItem(){Text ="Russain", Value ="5"},
-                new SelectListItem(){Text ="British", Value ="6"}
-            };
+            ViewBag.Language = new SelectList( await _languageRepository.GetLanguages(), "Id", "Text");
 
             ModelState.AddModelError("", "Please fill each input according to thier error message");
             return View();
