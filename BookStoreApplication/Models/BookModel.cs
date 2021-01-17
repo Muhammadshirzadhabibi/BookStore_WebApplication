@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStoreApplication.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,8 +10,9 @@ namespace BookStoreApplication.Models
     public class BookModel
     {
         public int Id { get; set; }
-        [StringLength(100, MinimumLength =5)]
+        [StringLength(100, MinimumLength = 5)]
         [Required(ErrorMessage = "Please enter the title")]
+        //[MyCustomValidation("Mvc")]
         public string Title { get; set; }
         [StringLength(100, MinimumLength = 3)]
         [Required(ErrorMessage = "Please enter the Author name")]
