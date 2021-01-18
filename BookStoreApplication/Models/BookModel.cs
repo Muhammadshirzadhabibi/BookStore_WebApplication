@@ -1,4 +1,5 @@
 ﻿using BookStoreApplication.Helpers;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,5 +27,9 @@ namespace BookStoreApplication.Models
         [Display(Name ="Total pages of book")]
         [Required(ErrorMessage = "Please enter totalPages")]
         public int? TotalPages { get; set; }
+        [Display(Name ="Please upload your cover photo")]
+        [Required]
+        public IFormFile CoverPhoto { get; set; }
+        public string CoverImageUrl { get; set; }
     }
 }

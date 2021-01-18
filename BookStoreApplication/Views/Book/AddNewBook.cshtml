@@ -1,5 +1,5 @@
 ﻿@model BookModel
-@{ 
+@{
     ViewBag.Title = "AddNewBook";
 }
 <div class="container">
@@ -16,40 +16,61 @@
         </div>
     }
 
-<form method="post" asp-action="AddNewBook" asp-controller="Book">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="LanguageId">Language</label>
-        <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
-            <option value="">Please choose book language</option>
-        </select>
-        <span asp-validation-for="LanguageId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Author">Author</label>
-        <input asp-for="Author" class="form-control" />
-        <span asp-validation-for="Author" class="text-danger"></span>
+    <form method="post" asp-action="AddNewBook" asp-controller="Book" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title">Title</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LanguageId">Language</label>
+            <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
+                <option value="">Please choose book language</option>
+            </select>
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Author">Author</label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
 
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">Description</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
 
-    </div>
-    <div class="form-group">
-        <label asp-for="TotalPages">Total_Pages</label>
-        <input asp-for="TotalPages" class="form-control" />
-        <span asp-validation-for="TotalPages" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TotalPages">Total_Pages</label>
+            <input asp-for="TotalPages" class="form-control" />
+            <span asp-validation-for="TotalPages" class="text-danger"></span>
 
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Add Book" class="btn btn-primary" />
-    </div>
-</form>
+        </div>
+        <div class="form-group">
+            <label asp-for="CoverPhoto" class=""></label>
+            <div class="custom-file">
+                <input asp-for="CoverPhoto" class="custom-file-input" id="customFile"/>
+                <label class="custom-file-label" for="customFile">choose file</label>
+            </div>
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add Book" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
+@section scripts{
+    <script>
+        function myComplete(data) {
+            alert("I am from complete");
+        }
+        function mySuccess(data) {
+            alert("I am from success");
+        }
+        function myFailure(data) {
+            alert("I am from failure");
+        }
+    </script>
+}
