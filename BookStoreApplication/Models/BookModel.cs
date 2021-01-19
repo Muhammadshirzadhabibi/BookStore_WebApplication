@@ -31,5 +31,10 @@ namespace BookStoreApplication.Models
         [Required]
         public IFormFile CoverPhoto { get; set; }
         public string CoverImageUrl { get; set; }
+        [Display(Name ="Please upload your slide show images")]
+        [Required]
+        public IFormFileCollection GalleryFiles { get; set; }
+        public List<GalleryModel> Gallery { get; set; }
+
     }
 }

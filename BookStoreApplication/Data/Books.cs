@@ -18,7 +18,7 @@ namespace BookStoreApplication.Data
         public string CoverImageUrl { get; set; }
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
-
         public Language Language { get; set; }
+        public ICollection<BookGallery> bookGallery { get; set; }
     }
 }

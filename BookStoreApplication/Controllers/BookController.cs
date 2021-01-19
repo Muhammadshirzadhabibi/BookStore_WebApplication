@@ -1,6 +1,7 @@
 ﻿using BookStoreApplication.Models;
 using BookStoreApplication.Repository;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -55,10 +56,21 @@ namespace BookStoreApplication.Controllers
                 if (bookModel.CoverPhoto != null)
                 {
                     string folder = "Books/cover/";
-                    folder += Guid.NewGuid().ToString() + "_" + bookModel.CoverPhoto.FileName;
-                    bookModel.CoverImageUrl = "/"+folder;
-                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                    await bookModel.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                 bookModel.CoverImageUrl =  await UploadImage(folder, bookModel.CoverPhoto);
+                }
+                bookModel.Gallery = new List<GalleryModel>();
+                if (bookModel.GalleryFiles != null)
+                {
+                    string folder = "Books/gallery/";
+                    foreach (var file in bookModel.GalleryFiles)
+                    {
+                        var gallery = new GalleryModel()
+                        {
+                            Name = file.FileName,
+                            URL = await UploadImage(folder, file)
+                        };
+                        bookModel.Gallery.Add(gallery);
+                    }
                 }
                 int id = await _bookRepository.AddNewBook(bookModel);
                 if (id > 0)
@@ -71,6 +83,16 @@ namespace BookStoreApplication.Controllers
 
             ModelState.AddModelError("", "Please fill each input according to thier error message");
             return View();
+        }
+
+        private async Task<string> UploadImage(string folderPath, IFormFile file)
+        {
+           
+            folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
+            string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
+            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+            return "/" + folderPath;
         }
 
         private List<LanguageModel> GetLanguage()
