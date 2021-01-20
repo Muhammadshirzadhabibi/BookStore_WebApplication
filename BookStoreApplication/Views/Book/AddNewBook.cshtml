@@ -65,20 +65,16 @@
         <span asp-validation-for="GalleryFiles" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="BookPdf" class=""></label>
+        <div class="custom-file">
+            <input asp-for="BookPdf" class="custom-file-input" id="customFile" />
+            <label class="custom-file-label" for="customFile">choose file</label>
+        </div>
+        <span asp-validation-for="BookPdf" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <input type="submit" value="Add Book" class="btn btn-primary" />
     </div>
 </form>
 </div>
-@section scripts{
-    <script>
-        function myComplete(data) {
-            alert("I am from complete");
-        }
-        function mySuccess(data) {
-            alert("I am from success");
-        }
-        function myFailure(data) {
-            alert("I am from failure");
-        }
-    </script>
-}
+
